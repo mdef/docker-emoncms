@@ -4,7 +4,6 @@ MAINTAINER https://github.com/mdef
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN echo 'Acquire::http { Proxy "http://192.168.1.143:3142"; };' > /etc/apt/apt.conf.d/proxy
 RUN apt-get update
 
 RUN \
