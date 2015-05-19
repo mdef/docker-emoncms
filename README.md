@@ -1,4 +1,6 @@
-**Docker image creation build stage**
+**Docker image creation for [Emoncms.org](http://emoncms.org/ "")**
+
+Emoncms is running on ubuntu with nginx, mysql,php5-fpm
 
 ```bash
 git clone https://github.com/mdef/docker-emoncms
