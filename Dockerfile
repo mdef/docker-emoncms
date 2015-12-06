@@ -28,7 +28,7 @@ RUN chown www-data:root /var/lib/{phpfiwa,phpfina,phptimeseries}
 RUN mkdir -p /var/www/emoncms
 RUN chown www-data:www-data /var/www/emoncms
 RUN git clone https://github.com/emoncms/emoncms.git /var/www/emoncms
-
+RUN git clone https://github.com/emoncms/app.git /var/www/emoncms/Modules/app
 
 RUN cp /var/www/emoncms/default.settings.php /var/www/emoncms/settings.php
 RUN sed -i 's/$username = "_DB_USER_";/$username = "emoncms";/g' /var/www/emoncms/settings.php
@@ -38,7 +38,6 @@ RUN mkdir /var/lib/php5/sessions && chown www-data:www-data /var/lib/php5/sessio
 RUN sed -i 's/;session.save_path = "\/var\/lib\/php5"/session.save_path = "\/var\/lib\/php5\/sessions"/g' /etc/php5/fpm/php.ini
 
 
-ADD ./emoncms.conf /etc/nginx/conf.d/emoncms.conf
 ADD ./emoncms.conf /etc/nginx/conf.d/emoncms.conf
 
 
