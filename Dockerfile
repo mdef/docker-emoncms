@@ -13,7 +13,8 @@ sudo pecl install channel://pecl.php.net/dio-0.0.6 redis swift/swift &&\
 #sudo sh -c 'echo "extension=dio.so" > /etc/php5/apache2/conf.d/20-dio.ini' &&\
 sudo sh -c 'echo "extension=dio.so" > /etc/php5/cli/conf.d/20-dio.ini' &&\
 #sudo sh -c 'echo "extension=redis.so" > /etc/php5/apache2/conf.d/20-redis.ini' &&\
-sudo sh -c 'echo "extension=redis.so" > /etc/php5/cli/conf.d/20-redis.ini'
+sudo sh -c 'echo "extension=redis.so" > /etc/php5/cli/conf.d/20-redis.ini' &&\
+sudo sh -c 'echo "extension=redis.so" > /etc/php5/fpm/conf.d/20-redis.ini'
 
 RUN /etc/init.d/mysql start && \
 echo "create database emoncms;" | mysql -u root && \
@@ -33,6 +34,7 @@ RUN git clone https://github.com/emoncms/emoncms.git /var/www/emoncms
 RUN cp /var/www/emoncms/default.settings.php /var/www/emoncms/settings.php
 RUN sed -i 's/$username = "_DB_USER_";/$username = "emoncms";/g' /var/www/emoncms/settings.php
 RUN sed -i 's/$password = "_DB_PASSWORD_";/$password = "emoncms";/g' /var/www/emoncms/settings.php
+RUN sed -i 's/$redis_enabled = false;/$redis_enabled = true;/g' /var/www/emoncms/settings.php
 
 RUN mkdir /var/lib/php5/sessions && chown www-data:www-data /var/lib/php5/sessions
 RUN sed -i 's/;session.save_path = "\/var\/lib\/php5"/session.save_path = "\/var\/lib\/php5\/sessions"/g' /etc/php5/fpm/php.ini
